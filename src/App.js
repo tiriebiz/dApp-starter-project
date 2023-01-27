@@ -177,7 +177,7 @@ export default function App() {
 
       <div className="dataContainer">
         <div className="header">
-        <span role="img" aria-label="hand-wave">👋</span> WELCOME!
+        <span role="img" aria-label="hand-wave">👋</span> WELCOME to tiriebiz's 1st dApp!
         </div>
 
         <div className="bio">
