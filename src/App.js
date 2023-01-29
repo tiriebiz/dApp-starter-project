@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {ethers} from "ethers";
 import abi from "./utils/WavePortal.json";
 
+import logo from "./assets/img/logo.svg";
 
 export default function App() {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -173,15 +174,14 @@ export default function App() {
     checkIfWalletIsConnected();
   }, []);
   return (
-    <div className="mainContainer">
-
+  <div className="appContainer">
+    <header>
+      <img className="logo" src={logo} />
+    </header>
+    <main className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-        <span role="img" aria-label="hand-wave">👋</span> WELCOME to tiriebiz's 1st dApp!
-        </div>
-
-        <div className="bio">
-        イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
+        <span role="img" aria-label="hand-wave">👋</span> WELCOME to the 1st dApp!<br /> - Wave Portal -!
         </div>
 
         {!currentAccount && (
@@ -190,24 +190,32 @@ export default function App() {
           </button>
         )}
         {currentAccount && (
-          <button className="waveButton" onClick={connectWallet}>
-            Wallet Connected
-          </button>
+           <p>Wallet Connected.</p>
         )}
+
+        <div className="bio">
+        メッセージを入力して、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
+        </div>
+
         {currentAccount && (
-          <button className="waveButton" onClick={wave}>
-          Wave at Me
-          </button>
-        )}
-        {currentAccount && (
-          <textarea
+         <div className="messageForm">
+           <textarea
             name="msgArea"
             placeholder="input message."
             type="text"
             id="msg"
             value={msgValue}
             onChange={(e) => setMsgValue(e.target.value)}
-          />
+           />
+          <button className="waveButton" onClick={wave}>
+          Wave at Me 👋
+          </button>
+         </div>
+        )}
+        {currentAccount && allWaves.length > 0 && (
+          <h3>
+          History
+          </h3>
         )}
         {currentAccount &&
           allWaves
@@ -216,11 +224,7 @@ export default function App() {
               return (
                 <div
                   key={index}
-                  style={{
-                    backgroundColor: "#F8F8FF",
-                    marginTop: "16px",
-                    padding: "8px",
-                  }}
+                  className="history-item"
                 >
                   <div>Address: {wave.address}</div>
                   <div>Time: {wave.timestamp.toString()}</div>
@@ -230,6 +234,10 @@ export default function App() {
             }
         )}
       </div>
-    </div>
+    </main>
+    <footer>
+      <p className="copyright">© Goeswell Co., Ltd. All Rights Reserved.</p>
+    </footer>
+  </div>
   );
 }
